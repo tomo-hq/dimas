@@ -1,0 +1,598 @@
+---
+import pic01 from "@assets/images/dishes/IMG_01.jpg";
+import pic02 from "@assets/images/dishes/IMG_02.jpg";
+import pic03 from "@assets/images/dishes/IMG_03.jpg";
+import pic04 from "@assets/images/dishes/IMG_04.jpg";
+import pic05 from "@assets/images/dishes/IMG_05.jpg";
+import pic06 from "@assets/images/dishes/IMG_06.jpg";
+import pic07 from "@assets/images/dishes/IMG_07.jpg";
+import pic08 from "@assets/images/dishes/IMG_08.jpg";
+import pic09 from "@assets/images/dishes/IMG_09.jpg";
+import pic10 from "@assets/images/dishes/IMG_10.jpg";
+import pic11 from "@assets/images/dishes/IMG_11.jpg";
+const images = [
+  pic01,
+  pic02,
+  pic03,
+  pic04,
+  pic05,
+  pic06,
+  pic07,
+  pic08,
+  pic09,
+  pic11,
+  pic10,
+];
+---
+
+<div class="carousel-container">
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      {
+        images.map((image, index) => (
+          <div class="card" data-index={index}>
+            <img src={image.src} alt={`Dish ${index + 1}`} class="card-image" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    transform-style: preserve-3d;
+    cursor: grab;
+    transition: transform 0.1s ease-out;
+  }
+
+  .carousel:active {
+    cursor: grabbing;
+  }
+
+  .carousel.smooth-transition {
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .card {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow:
+      0 25px 50px rgba(0, 0, 0, 0.2),
+      0 12px 24px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    left: 20px;
+    top: 20px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+    display: block;
+  }
+
+  .card:hover .card-image {
+    transform: scale(1.03);
+  }
+
+  .card.center {
+    transform: translateZ(150px) scale(1.15);
+    z-index: 10;
+    opacity: 1;
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, 0.3),
+      0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .card.left-1 {
+    transform: translateX(-250px) translateZ(80px) rotateY(35deg) scale(0.9);
+    z-index: 6;
+  }
+
+  .card.right-1 {
+    transform: translateX(250px) translateZ(80px) rotateY(-35deg) scale(0.9);
+    z-index: 6;
+  }
+
+  .card.left-2 {
+    transform: translateX(-420px) translateZ(20px) rotateY(55deg) scale(0.75);
+    z-index: 3;
+  }
+
+  .card.right-2 {
+    transform: translateX(420px) translateZ(20px) rotateY(-55deg) scale(0.75);
+    z-index: 3;
+  }
+
+  .card.hidden {
+    transform: translateX(-600px) translateZ(-100px) rotateY(80deg) scale(0.4);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+    z-index: 100;
+  }
+
+  .control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(20px);
+    outline: none;
+  }
+
+  .control-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .control-btn:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  .instructions {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 16px 32px;
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .carousel {
+      width: 280px;
+      height: 280px;
+    }
+
+    .card {
+      width: 240px;
+      height: 240px;
+      left: 20px;
+      top: 20px;
+    }
+
+    .card.center {
+      transform: translateZ(100px) scale(1.1);
+    }
+
+    .card.left-1 {
+      transform: translateX(-200px) translateZ(60px) rotateY(30deg) scale(0.85);
+    }
+
+    .card.right-1 {
+      transform: translateX(200px) translateZ(60px) rotateY(-30deg) scale(0.85);
+    }
+
+    .card.left-2 {
+      transform: translateX(-320px) translateZ(10px) rotateY(50deg) scale(0.7);
+    }
+
+    .card.right-2 {
+      transform: translateX(320px) translateZ(10px) rotateY(-50deg) scale(0.7);
+    }
+
+    .instructions {
+      font-size: 12px;
+      padding: 12px 24px;
+      top: 20px;
+    }
+
+    .control-btn {
+      width: 48px;
+      height: 48px;
+    }
+
+    .controls {
+      bottom: 30px;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel {
+      width: 240px;
+      height: 240px;
+    }
+
+    .card {
+      width: 200px;
+      height: 200px;
+      left: 20px;
+      top: 20px;
+    }
+
+    .card.center {
+      transform: translateZ(80px) scale(1.05);
+    }
+
+    .card.left-1 {
+      transform: translateX(-160px) translateZ(40px) rotateY(25deg) scale(0.8);
+    }
+
+    .card.right-1 {
+      transform: translateX(160px) translateZ(40px) rotateY(-25deg) scale(0.8);
+    }
+
+    .card.left-2 {
+      transform: translateX(-260px) translateZ(0px) rotateY(45deg) scale(0.65);
+    }
+
+    .card.right-2 {
+      transform: translateX(260px) translateZ(0px) rotateY(-45deg) scale(0.65);
+    }
+
+    .carousel-container {
+      min-height: 400px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .card {
+      width: 160px;
+      height: 160px;
+    }
+
+    .carousel {
+      width: 200px;
+      height: 200px;
+    }
+  }
+</style>
+
+<script define:vars={{ totalImages: images.length }}>
+  class Enhanced3DCarousel {
+    constructor() {
+      this.carousel = document.getElementById("carousel");
+      this.cards = Array.from(document.querySelectorAll(".card"));
+      this.prevBtn = document.getElementById("prevBtn");
+      this.nextBtn = document.getElementById("nextBtn");
+
+      this.currentIndex = 0;
+      this.totalCards = totalImages;
+      this.isAnimating = false;
+      this.isDragging = false;
+
+      this.startX = 0;
+      this.startY = 0;
+      this.currentX = 0;
+      this.velocity = 0;
+      this.lastMoveTime = 0;
+      this.lastMoveX = 0;
+      this.momentum = 0;
+      this.isDecelerating = false;
+
+      this.friction = 0.95;
+      this.threshold = 0.1;
+      this.maxVelocity = 2;
+
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.updatePositions();
+    }
+
+    bindEvents() {
+      this.prevBtn?.addEventListener("click", () => this.move(-1));
+      this.nextBtn?.addEventListener("click", () => this.move(1));
+
+      this.carousel.addEventListener(
+        "touchstart",
+        this.handleTouchStart.bind(this),
+        { passive: true },
+      );
+      this.carousel.addEventListener(
+        "touchmove",
+        this.handleTouchMove.bind(this),
+        { passive: false },
+      );
+      this.carousel.addEventListener(
+        "touchend",
+        this.handleTouchEnd.bind(this),
+        { passive: true },
+      );
+
+      this.carousel.addEventListener(
+        "mousedown",
+        this.handleMouseDown.bind(this),
+      );
+      document.addEventListener("mousemove", this.handleMouseMove.bind(this));
+      document.addEventListener("mouseup", this.handleMouseUp.bind(this));
+
+      this.cards.forEach((card, index) => {
+        card.addEventListener("click", (e) => {
+          if (!this.isDragging && !this.isAnimating) {
+            this.moveToIndex(index);
+          }
+        });
+      });
+
+      this.carousel.addEventListener("dragstart", (e) => e.preventDefault());
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") this.move(-1);
+        if (e.key === "ArrowRight") this.move(1);
+      });
+    }
+
+    handleTouchStart(e) {
+      this.stopMomentum();
+      this.startX = e.touches[0].clientX;
+      this.startY = e.touches[0].clientY;
+      this.currentX = this.startX;
+      this.isDragging = true;
+      this.velocity = 0;
+      this.lastMoveTime = Date.now();
+      this.lastMoveX = this.startX;
+      this.carousel.classList.remove("smooth-transition");
+    }
+
+    handleTouchMove(e) {
+      if (!this.isDragging) return;
+
+      const touchX = e.touches[0].clientX;
+      const touchY = e.touches[0].clientY;
+      const diffX = Math.abs(touchX - this.startX);
+      const diffY = Math.abs(touchY - this.startY);
+
+      if (diffX > diffY) {
+        e.preventDefault();
+        this.currentX = touchX;
+
+        const now = Date.now();
+        const timeDiff = now - this.lastMoveTime;
+        const moveDiff = this.currentX - this.lastMoveX;
+
+        if (timeDiff > 0) {
+          this.velocity = Math.max(
+            -this.maxVelocity,
+            Math.min(this.maxVelocity, moveDiff / timeDiff),
+          );
+        }
+
+        this.lastMoveTime = now;
+        this.lastMoveX = this.currentX;
+      }
+    }
+
+    handleTouchEnd(e) {
+      if (!this.isDragging) return;
+
+      const diffX = this.startX - this.currentX;
+      const diffY = this.startY - e.changedTouches[0].clientY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (Math.abs(diffX) > 50 || Math.abs(this.velocity) > 0.3) {
+          this.handleSwipeWithMomentum(diffX);
+        }
+      }
+
+      this.isDragging = false;
+      this.carousel.classList.add("smooth-transition");
+    }
+
+    handleMouseDown(e) {
+      this.stopMomentum();
+      this.startX = e.clientX;
+      this.currentX = this.startX;
+      this.isDragging = true;
+      this.velocity = 0;
+      this.lastMoveTime = Date.now();
+      this.lastMoveX = this.startX;
+      this.carousel.style.cursor = "grabbing";
+      this.carousel.classList.remove("smooth-transition");
+      e.preventDefault();
+    }
+
+    handleMouseMove(e) {
+      if (!this.isDragging) return;
+
+      e.preventDefault();
+      this.currentX = e.clientX;
+
+      const now = Date.now();
+      const timeDiff = now - this.lastMoveTime;
+      const moveDiff = this.currentX - this.lastMoveX;
+
+      if (timeDiff > 0) {
+        this.velocity = Math.max(
+          -this.maxVelocity,
+          Math.min(this.maxVelocity, moveDiff / timeDiff),
+        );
+      }
+
+      this.lastMoveTime = now;
+      this.lastMoveX = this.currentX;
+    }
+
+    handleMouseUp(e) {
+      if (!this.isDragging) {
+        this.carousel.style.cursor = "grab";
+        return;
+      }
+
+      const diffX = this.startX - this.currentX;
+
+      if (Math.abs(diffX) > 50 || Math.abs(this.velocity) > 0.3) {
+        this.handleSwipeWithMomentum(diffX);
+      }
+
+      this.isDragging = false;
+      this.carousel.style.cursor = "grab";
+      this.carousel.classList.add("smooth-transition");
+    }
+
+    handleSwipeWithMomentum(diffX) {
+      const direction = diffX > 0 ? 1 : -1;
+      const velocityFactor = Math.abs(this.velocity);
+
+      let steps = Math.ceil(velocityFactor * 3);
+      steps = Math.max(1, Math.min(steps, 5));
+
+      if (Math.abs(diffX) > 100) {
+        steps = Math.max(steps, 2);
+      }
+
+      this.startMomentumMovement(direction, steps);
+    }
+
+    startMomentumMovement(direction, steps) {
+      if (steps <= 0 || this.isAnimating) return;
+
+      this.isAnimating = true;
+      this.isDecelerating = true;
+
+      const moveStep = () => {
+        if (steps > 0 && this.isDecelerating) {
+          this.currentIndex =
+            (this.currentIndex + direction + this.totalCards) % this.totalCards;
+          this.updatePositions();
+          steps--;
+
+          const delay = Math.max(200, 600 - steps * 100);
+          setTimeout(moveStep, delay);
+        } else {
+          this.isAnimating = false;
+          this.isDecelerating = false;
+        }
+      };
+
+      moveStep();
+    }
+
+    stopMomentum() {
+      this.isDecelerating = false;
+    }
+
+    move(direction) {
+      if (this.isAnimating) return;
+
+      this.stopMomentum();
+      this.currentIndex =
+        (this.currentIndex + direction + this.totalCards) % this.totalCards;
+      this.updatePositions();
+    }
+
+    moveToIndex(targetIndex) {
+      if (targetIndex === this.currentIndex || this.isAnimating) return;
+
+      this.stopMomentum();
+      this.currentIndex = targetIndex;
+      this.updatePositions();
+    }
+
+    updatePositions() {
+      this.cards.forEach((card, index) => {
+        card.classList.remove(
+          "center",
+          "left-1",
+          "right-1",
+          "left-2",
+          "right-2",
+          "hidden",
+        );
+
+        let relativePosition = index - this.currentIndex;
+
+        if (relativePosition > this.totalCards / 2) {
+          relativePosition -= this.totalCards;
+        } else if (relativePosition < -this.totalCards / 2) {
+          relativePosition += this.totalCards;
+        }
+
+        switch (relativePosition) {
+          case 0:
+            card.classList.add("center");
+            break;
+          case -1:
+            card.classList.add("left-1");
+            break;
+          case 1:
+            card.classList.add("right-1");
+            break;
+          case -2:
+            card.classList.add("left-2");
+            break;
+          case 2:
+            card.classList.add("right-2");
+            break;
+          default:
+            card.classList.add("hidden");
+        }
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (totalImages > 0) {
+      new Enhanced3DCarousel();
+    }
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+import Layout from "@layouts/Layout.astro";
+const images = await Astro.glob("/src/assets/images/gallery/*").then(
+  (files) => {
+    return files.map((file) => file.default);
+  },
+);
+---
+
+<Layout
+  pageTitle="Gallery"
+  title="Dimas Restaurant"
+  description="Learn more about this place"
+>
+  <div class="flex w-full flex-col justify-between">
+    <div
+      class="masonry-grid mt-14 grid grid-cols-2 gap-1 px-10 pb-16 lg:grid-cols-3 lg:pb-32"
+    >
+      {
+        images.map((item, index) => (
+          <div class="masonry-grid-item" data-index={index}>
+            <a href={item.src || item} class="glightbox">
+              <img
+                src={item.src || item}
+                alt={`Place ${index + 1}`}
+                class="h-full w-full object-cover object-center"
+              />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import GLightbox from "glightbox";
+  import "../../../node_modules/glightbox/dist/css/glightbox.min.css";
+
+  document.addEventListener("astro:page-load", () => {
+    const lightbox = GLightbox({
+      touchNavigation: true,
+      autoplayVideos: true,
+      loop: true,
+      draggable: true,
+    });
+  });
+</script>

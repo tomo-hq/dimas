@@ -1,0 +1,554 @@
+---
+import Carousell from "@components/Carousell.astro";
+import Layout from "@layouts/Layout.astro";
+
+import BgMisti from "@assets/images/dimas/misti.jpg";
+import Hall from "@assets/images/dimas/hall.jpg";
+import Postre from "@assets/images/dishes/dessert.jpg";
+import Meet from "@assets/images/gallery/place5.jpeg";
+import { Image } from "astro:assets";
+
+import pic01 from "@assets/images/dishes/IMG_01.jpg";
+import pic02 from "@assets/images/dishes/IMG_02.jpg";
+import pic03 from "@assets/images/dishes/IMG_03.jpg";
+import pic04 from "@assets/images/dishes/IMG_04.jpg";
+import pic05 from "@assets/images/dishes/IMG_05.jpg";
+import pic07 from "@assets/images/dishes/IMG_07.jpg";
+import pic08 from "@assets/images/dishes/IMG_08.jpg";
+import pic09 from "@assets/images/dishes/IMG_09.jpg";
+import pic10 from "@assets/images/dishes/IMG_10.jpg";
+import pic11 from "@assets/images/dishes/IMG_11.jpg";
+
+const images = [
+  pic01,
+  pic02,
+  pic03,
+  pic04,
+  pic05,
+  pic07,
+  pic08,
+  pic09,
+  pic10,
+  pic11,
+];
+
+function getRandomImage() {
+  return images[Math.floor(Math.random() * images.length)];
+}
+
+const lunchImage = getRandomImage();
+const dinnerImage = getRandomImage();
+---
+
+<Layout
+  pageTitle="Dimas Restaurant"
+  title="Dimas Restaurant"
+  description="We invite you to enjoy the best of Peruvian gastronomy, in a new culinary proposal that fuses traditional and modern cuisine."
+>
+  <div class="flex flex-col">
+    <div class="parallax-container">
+      <Image
+        class="parallax-bg"
+        src={BgMisti}
+        alt="Misti"
+        width={1920}
+        height={1080}
+      />
+    </div>
+
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Contemporary Cuisine</h1>
+        <p class="hero-subtitle">
+          Dimas is the meeting place for many Arequipeños and tourists seeking
+          to enjoy a unique gastronomic experience.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-section about-section">
+      <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+          <p class="about-paragraph">
+            At Dimas, every dish tells a story. Located in the heart of
+            Arequipa, with the imposing view of the Misti volcano as a backdrop,
+            we offer a unique gastronomic experience that celebrates the
+            culinary richness of Peru.
+          </p>
+          <p class="about-paragraph">
+            Our chef combines traditional techniques with modern touches, using
+            fresh, local ingredients to create dishes that awaken all the
+            senses—each bite is a celebration of authentic flavors.
+          </p>
+          <p class="about-paragraph">
+            We invite you to live a memorable culinary experience in a welcoming
+            atmosphere, where tradition and innovation meet to delight your
+            palate.
+          </p>
+        </div>
+      </div>
+      <div class="hall-image-container">
+        <Image
+          class="hall-image"
+          src={Hall}
+          alt="Dimas Hall"
+          width={1200}
+          height={800}
+        />
+      </div>
+    </section>
+
+    <section class="content-section services-section desktop-only">
+      <div class="container">
+        <h2 class="section-title services-title">You’ll love our..</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-image-wrapper">
+              <Image
+                src={Postre}
+                alt="Desserts"
+                width={800}
+                height={800}
+                class="service-image"
+              />
+            </div>
+            <h3 class="service-title">Desserts</h3>
+            <p class="service-description">
+              We have a variety of desserts, all homemade with natural
+              ingredients and artisanal techniques.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-image-wrapper">
+              <Image
+                src={lunchImage}
+                alt="Lunches"
+                width={800}
+                height={800}
+                class="service-image"
+              />
+            </div>
+            <h3 class="service-title">Lunches</h3>
+            <p class="service-description">
+              Our varied menu offers different traditional and contemporary
+              dishes every week.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-image-wrapper">
+              <Image
+                src={dinnerImage}
+                alt="Dinners"
+                width={800}
+                height={800}
+                class="service-image"
+              />
+            </div>
+            <h3 class="service-title">Dinners</h3>
+            <p class="service-description">
+              For special occasions or to change your routine, you will find the
+              best dinners in a unique atmosphere.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section mobile-only">
+      <div class="container">
+        <h2 class="section-title mobile-carousel-title">
+          A glimpse of our dishes
+        </h2>
+      </div>
+      <Carousell />
+    </section>
+
+    <div class="flex flex-col">
+      <section class="meeting-section">
+        <Image
+          src={Meet}
+          alt="Meeting"
+          width={1920}
+          height={1080}
+          class="meeting-image"
+        />
+      </section>
+    </div>
+
+    <section class="content-section location-section" id="location">
+      <div class="location-container">
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2211.085608453216!2d-71.53706215532466!3d-16.396811322517514!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424a507d4498db%3A0xdcba881316a389fc!2sDimas!5e0!3m2!1ses-419!2spe!4v1745955026838!5m2!1ses-419!2spe"
+            width="600"
+            height="450"
+            style="border:0;"
+            class="location-map"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+
+        <div class="location-info">
+          <h3 class="location-title">Find us at..</h3>
+          <p class="location-address">Calle Santa Catalina 302</p>
+          <p class="location-description">
+            In the heart of the historic center of Arequipa, surrounded by the
+            city’s most beautiful colonial architecture.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+  }
+
+  .mobile-carousel-title {
+    color: #7c2d12;
+    position: relative;
+    margin-bottom: clamp(1rem, 4vw, 2rem);
+  }
+
+  .mobile-carousel-title::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(60px, 15vw, 120px);
+    height: 4px;
+    background: linear-gradient(to right, #dc2626, #ea580c);
+    border-radius: 2px;
+  }
+
+  .parallax-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120vh;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    will-change: transform;
+  }
+
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1;
+    padding-left: clamp(1rem, 5vw, 5rem);
+  }
+
+  .hero-content {
+    padding: clamp(2rem, 4vw, 3rem);
+    border-radius: 1rem;
+    color: white;
+    margin: 0;
+    max-width: min(90vw, 800px);
+  }
+
+  .hero-title {
+    display: block;
+    text-align: left;
+    font-size: clamp(3rem, 12vw, 8rem);
+    font-weight: bold;
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    opacity: 0.95;
+    line-height: 1.6;
+    text-align: left;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    max-width: 600px;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .content-section {
+    position: relative;
+    background: white;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .about-section {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-paragraph {
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    text-align: center;
+  }
+
+  .about-paragraph:last-child {
+    margin-bottom: 0;
+  }
+
+  .hall-image-container {
+    margin-top: clamp(3rem, 6vw, 4rem);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .hall-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .services-section {
+    background: white;
+  }
+
+  .services-title {
+    color: #7c2d12;
+    position: relative;
+  }
+
+  .services-title::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(60px, 15vw, 120px);
+    height: 4px;
+    background: linear-gradient(to right, #dc2626, #ea580c);
+    border-radius: 2px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    margin-top: clamp(2rem, 6vw, 4rem);
+  }
+
+  .service-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    text-align: center;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  }
+
+  .service-image-wrapper {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .service-image {
+    width: clamp(120px, 25vw, 200px);
+    height: clamp(120px, 25vw, 200px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+    border: 4px solid #fef2f2;
+  }
+
+  .service-title {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    color: #7c2d12;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  .service-description {
+    font-size: clamp(0.95rem, 2vw, 1rem);
+    line-height: 1.6;
+    color: #6b7280;
+  }
+
+  .meeting-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meeting-image {
+    width: 100%;
+    height: clamp(300px, 50vw, 600px);
+    object-fit: cover;
+  }
+
+  .location-section {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+  }
+
+  .location-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .map-wrapper {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  }
+
+  .location-map {
+    width: 100%;
+    height: clamp(300px, 50vw, 450px);
+    border-radius: 1.5rem;
+  }
+
+  .location-info {
+    text-align: center;
+  }
+
+  .location-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #7c2d12;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    line-height: 1.2;
+  }
+
+  .location-address {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    color: #991b1b;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .location-description {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+    color: #6b7280;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .location-container {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 4rem);
+    }
+
+    .location-info {
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .hero-section {
+      padding-left: clamp(1rem, 4vw, 3rem);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      justify-content: center;
+      align-items: center;
+      padding-left: 0;
+    }
+
+    .hero-content {
+      text-align: center;
+      padding: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .hero-title {
+      text-align: center;
+      line-height: 1;
+    }
+
+    .hero-subtitle {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content {
+      margin: 0 0.5rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero-title {
+      font-size: min(10rem, 12vw);
+    }
+
+    .hero-subtitle {
+      font-size: min(1.5rem, 2.5vw);
+    }
+  }
+</style>
