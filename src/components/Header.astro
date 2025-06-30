@@ -1,15 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import Logo from "@assets/images/dimas/logo.png";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 const { currentLocale } = Astro;
 const contactURL = getRelativeLocaleUrl(currentLocale ?? "en", "contact");
 const locationURL = getRelativeLocaleUrl(currentLocale ?? "en");
 const galleryURL = getRelativeLocaleUrl(currentLocale ?? "en", "gallery");
-const homeURL = getRelativeLocaleUrl(currentLocale ?? "en", "home");
+const homeURL = getRelativeLocaleUrl(currentLocale ?? "en");
 
-// Construcción correcta de la URL de ubicación con hash
 const fullLocationURL = `${locationURL}#location`;
 ---
 
@@ -37,7 +35,7 @@ const fullLocationURL = `${locationURL}#location`;
         <li>
           <a href={homeURL} class="flex items-center">
             <Image
-              src={Logo}
+              src="https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dimas/logo.png"
               alt="Logo"
               class="h-12 w-12 rounded-full transition-transform duration-300"
               width={200}
@@ -75,7 +73,7 @@ const fullLocationURL = `${locationURL}#location`;
       class="rounded-full bg-white p-3 shadow-md transition-all duration-300 hover:scale-105"
     >
       <Image
-        src={Logo}
+        src="https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dimas/logo.png"
         alt="Logo"
         class="h-32 w-32 rounded-full transition-all duration-300"
         width={300}

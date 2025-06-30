@@ -1,27 +1,15 @@
 ---
-import pic01 from "@assets/images/dishes/IMG_01.jpg";
-import pic02 from "@assets/images/dishes/IMG_02.jpg";
-import pic03 from "@assets/images/dishes/IMG_03.jpg";
-import pic04 from "@assets/images/dishes/IMG_04.jpg";
-import pic05 from "@assets/images/dishes/IMG_05.jpg";
-import pic06 from "@assets/images/dishes/IMG_06.jpg";
-import pic07 from "@assets/images/dishes/IMG_07.jpg";
-import pic08 from "@assets/images/dishes/IMG_08.jpg";
-import pic09 from "@assets/images/dishes/IMG_09.jpg";
-import pic10 from "@assets/images/dishes/IMG_10.jpg";
-import pic11 from "@assets/images/dishes/IMG_11.jpg";
 const images = [
-  pic01,
-  pic02,
-  pic03,
-  pic04,
-  pic05,
-  pic06,
-  pic07,
-  pic08,
-  pic09,
-  pic11,
-  pic10,
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_01.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_02.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_03.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_04.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_05.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_07.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_08.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_09.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_10.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/dishes/IMG_11.jpg",
 ];
 ---
 
@@ -31,7 +19,7 @@ const images = [
       {
         images.map((image, index) => (
           <div class="card" data-index={index}>
-            <img src={image.src} alt={`Dish ${index + 1}`} class="card-image" />
+            <img src={image} alt={`Dish ${index + 1}`} class="card-image" />
           </div>
         ))
       }

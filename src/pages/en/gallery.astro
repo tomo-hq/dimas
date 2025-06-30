@@ -1,10 +1,16 @@
 ---
 import Layout from "@layouts/Layout.astro";
-const images = await Astro.glob("/src/assets/images/gallery/*").then(
-  (files) => {
-    return files.map((file) => file.default);
-  },
-);
+
+const images = [
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place1.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place2.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place3.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place4.jpeg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place5.jpeg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place6.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/palce7.jpg",
+  "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/main/src/assets/images/gallery/place8.jpg",
+];
 ---
 
 <Layout
@@ -19,9 +25,9 @@ const images = await Astro.glob("/src/assets/images/gallery/*").then(
       {
         images.map((item, index) => (
           <div class="masonry-grid-item" data-index={index}>
-            <a href={item.src || item} class="glightbox">
+            <a href={item} class="glightbox">
               <img
-                src={item.src || item}
+                src={item}
                 alt={`Place ${index + 1}`}
                 class="h-full w-full object-cover object-center"
               />
