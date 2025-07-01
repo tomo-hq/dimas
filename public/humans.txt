@@ -1,4 +1,0 @@
-[Creator] :: Renato Monroy (https://github.com/rdev32)
-[Tools]   :: Astro + Tailwind
-[Date]    :: 27-05-2025
-[Credits] :: Special thanks to Sergio Benavides for the bridge photo
