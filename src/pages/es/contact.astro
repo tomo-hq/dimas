@@ -17,12 +17,25 @@ import { Image } from "astro:assets";
       class="pointer-events-none absolute top-36 right-16 z-0 rotate-[-15deg] opacity-30"
     />
 
-    <form
-      action="https://formspree.io/f/TU_FORM_ID"
-      method="POST"
-      class="contact-form relative z-10"
-    >
+    <form id="contactForm" class="contact-form relative z-10">
       <div class="mx-auto flex h-screen max-w-md flex-col justify-center gap-6">
+        <div>
+          <label
+            for="fullName"
+            class="mb-2 block text-sm font-medium text-gray-700"
+          >
+            Nombre Completo *
+          </label>
+          <input
+            type="text"
+            name="fullName"
+            id="fullName"
+            required
+            class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 transition-colors focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
+            placeholder="Tu nombre completo"
+          />
+        </div>
+
         <div>
           <label
             for="email"
@@ -37,6 +50,22 @@ import { Image } from "astro:assets";
             required
             class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 transition-colors focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
             placeholder="tu@email.com"
+          />
+        </div>
+
+        <div>
+          <label
+            for="phone"
+            class="mb-2 block text-sm font-medium text-gray-700"
+          >
+            Teléfono <span class="text-gray-500">(opcional)</span>
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 transition-colors focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
+            placeholder="+51 999 999 999"
           />
         </div>
 
@@ -65,7 +94,8 @@ import { Image } from "astro:assets";
         <div>
           <button
             type="submit"
-            class="group flex w-full transform items-center justify-center gap-2 rounded-lg bg-red-900 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-red-900 hover:shadow-xl"
+            id="submitButton"
+            class="group flex w-full transform items-center justify-center gap-2 rounded-lg bg-red-900 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-red-900 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,14 +111,92 @@ import { Image } from "astro:assets";
                 d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
               ></path>
             </svg>
-            Enviar mensaje
+            <span id="buttonText">Enviar mensaje</span>
           </button>
         </div>
 
+        <div id="formStatus" class="min-h-[20px] text-center text-sm"></div>
+
         <p class="text-center text-sm text-gray-600">
-          Te responderemos lo mas pronto posible.
+          Te responderemos lo más pronto posible.
         </p>
       </div>
     </form>
   </div>
 </Layout>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement;
+  const statusDiv = document.getElementById("formStatus") as HTMLDivElement;
+  const submitButton = document.getElementById(
+    "submitButton",
+  ) as HTMLButtonElement;
+  const buttonText = document.getElementById("buttonText") as HTMLSpanElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    submitButton.disabled = true;
+    buttonText.textContent = "Enviando...";
+    statusDiv.textContent = "";
+    statusDiv.className = "text-center text-sm min-h-[20px]";
+
+    const formData = new FormData(form);
+    const fullName = formData.get("fullName") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const originalMessage = formData.get("message") as string;
+
+    // Crear mensaje formateado
+    const formattedMessage = `
+DATOS DEL CONTACTO:
+==================
+Nombre: ${fullName}
+Email: ${email}
+${phone ? `Teléfono: ${phone}` : "Teléfono: No proporcionado"}
+
+MENSAJE:
+========
+${originalMessage}
+
+---
+Este mensaje fue enviado desde el formulario de contacto del sitio web de Dimas Restaurante.
+    `.trim();
+    formData.set("message", formattedMessage);
+
+    try {
+      const response = await fetch(`https://formspree.io/f/xblyvngp`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        statusDiv.textContent =
+          "¡Mensaje enviado con éxito! Te responderemos pronto.";
+        statusDiv.className =
+          "text-center text-sm min-h-[20px] text-green-600 font-medium";
+        form.reset();
+      } else {
+        const data = await response.json();
+        const errorMessage = data.errors
+          ? data.errors.map((e: any) => e.message).join(", ")
+          : "Error al enviar el formulario. Por favor, inténtalo de nuevo.";
+
+        statusDiv.textContent = errorMessage;
+        statusDiv.className =
+          "text-center text-sm min-h-[20px] text-red-600 font-medium";
+      }
+    } catch (error) {
+      statusDiv.textContent =
+        "Error de conexión. Por favor, verifica tu internet e inténtalo de nuevo.";
+      statusDiv.className =
+        "text-center text-sm min-h-[20px] text-red-600 font-medium";
+    } finally {
+      submitButton.disabled = false;
+      buttonText.textContent = "Enviar mensaje";
+    }
+  });
+</script>

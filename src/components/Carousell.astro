@@ -327,9 +327,36 @@ const images = [
       this.updatePositions();
     }
 
+    destroy() {
+      this.prevBtn?.removeEventListener("click", this.handlePrevClick);
+      this.nextBtn?.removeEventListener("click", this.handleNextClick);
+
+      this.carousel?.removeEventListener("touchstart", this.handleTouchStart);
+      this.carousel?.removeEventListener("touchmove", this.handleTouchMove);
+      this.carousel?.removeEventListener("touchend", this.handleTouchEnd);
+      this.carousel?.removeEventListener("mousedown", this.handleMouseDown);
+
+      document.removeEventListener("mousemove", this.handleMouseMove);
+      document.removeEventListener("mouseup", this.handleMouseUp);
+      document.removeEventListener("keydown", this.handleKeyDown);
+
+      this.cards.forEach((card) => {
+        card.removeEventListener("click", this.handleCardClick);
+      });
+
+      this.stopMomentum();
+    }
+
     bindEvents() {
-      this.prevBtn?.addEventListener("click", () => this.move(-1));
-      this.nextBtn?.addEventListener("click", () => this.move(1));
+      this.handlePrevClick = () => this.move(-1);
+      this.handleNextClick = () => this.move(1);
+      this.handleKeyDown = (e) => {
+        if (e.key === "ArrowLeft") this.move(-1);
+        if (e.key === "ArrowRight") this.move(1);
+      };
+
+      this.prevBtn?.addEventListener("click", this.handlePrevClick);
+      this.nextBtn?.addEventListener("click", this.handleNextClick);
 
       this.carousel.addEventListener(
         "touchstart",
@@ -355,19 +382,16 @@ const images = [
       document.addEventListener("mouseup", this.handleMouseUp.bind(this));
 
       this.cards.forEach((card, index) => {
-        card.addEventListener("click", (e) => {
+        const handleCardClick = (e) => {
           if (!this.isDragging && !this.isAnimating) {
             this.moveToIndex(index);
           }
-        });
+        };
+        card.addEventListener("click", handleCardClick);
       });
 
       this.carousel.addEventListener("dragstart", (e) => e.preventDefault());
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") this.move(-1);
-        if (e.key === "ArrowRight") this.move(1);
-      });
+      document.addEventListener("keydown", this.handleKeyDown);
     }
 
     handleTouchStart(e) {
@@ -578,9 +602,34 @@ const images = [
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (totalImages > 0) {
-      new Enhanced3DCarousel();
+  let carouselInstance = null;
+
+  function initializeCarousel() {
+    if (carouselInstance) {
+      carouselInstance.destroy();
+      carouselInstance = null;
     }
-  });
+
+    const carousel = document.getElementById("carousel");
+    if (carousel && totalImages > 0) {
+      carouselInstance = new Enhanced3DCarousel();
+    }
+  }
+
+  function cleanupCarousel() {
+    if (carouselInstance) {
+      carouselInstance.destroy();
+      carouselInstance = null;
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeCarousel);
+  } else {
+    initializeCarousel();
+  }
+
+  document.addEventListener("astro:page-load", initializeCarousel);
+  document.addEventListener("astro:before-preparation", cleanupCarousel);
+
+  window.addEventListener("beforeunload", cleanupCarousel);
 </script>
