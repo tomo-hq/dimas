@@ -503,16 +503,7 @@ const images = [
 
     handleSwipeWithMomentum(diffX) {
       const direction = diffX > 0 ? 1 : -1;
-      const velocityFactor = Math.abs(this.velocity);
-
-      let steps = Math.ceil(velocityFactor * 3);
-      steps = Math.max(1, Math.min(steps, 5));
-
-      if (Math.abs(diffX) > 100) {
-        steps = Math.max(steps, 2);
-      }
-
-      this.startMomentumMovement(direction, steps);
+      this.move(direction, 1);
     }
 
     startMomentumMovement(direction, steps) {
