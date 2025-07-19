@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Carousell from "@components/Carousell.astro";
 import Layout from "@layouts/Layout.astro";
+import ContactButton from "@components/ContactButton.astro";
 
 const images = [
   "https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/static/src/assets/images/dishes/IMG_01.jpg",
@@ -47,6 +48,7 @@ const dinnerImage = getRandomImage();
           Dimas is the meeting place for many locals and tourists seeking to
           enjoy a unique gastronomic experience.
         </p>
+        <ContactButton class="mx-2 my-2" />
       </div>
     </section>
 

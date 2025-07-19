@@ -9,6 +9,7 @@ import { Image } from "astro:assets";
   description="Te invitamos a disfrutar de lo mejor de la gastronomía peruana, en una nueva propuesta culinaria que fusiona la cocina tradicional y moderna."
 >
   <div class="relative min-h-screen">
+    <div class="h-48 bg-white md:hidden"></div>
     <Image
       src="https://raw.githubusercontent.com/tomo-hq/dimas/refs/heads/static/src/assets/images/stamp.png"
       alt="stamp"
@@ -18,7 +19,7 @@ import { Image } from "astro:assets";
     />
 
     <form id="contactForm" class="contact-form relative z-10">
-      <div class="mx-auto flex h-screen max-w-md flex-col justify-center gap-6">
+      <div class="mx-auto flex h-screen max-w-sm flex-col justify-center gap-6">
         <div>
           <label
             for="fullName"
